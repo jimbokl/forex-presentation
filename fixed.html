@@ -225,7 +225,7 @@
             <div class="info-card">
               <h3 class="text-xl font-bold mb-4">Волатильность основных валютных пар</h3>
               <div class="chart-container">
-                <img src="images/volatility_chart.svg" alt="График волатильности валютных пар" class="w-full h-full object-contain">
+                <canvas id="volatilityChart"></canvas>
               </div>
             </div>
           </div>
@@ -366,7 +366,47 @@
             <div class="info-card">
               <h3 class="text-xl font-bold mb-3">Корреляция валютных пар</h3>
               <div id="correlation-container">
-                <img src="images/correlation_chart.svg" alt="Таблица корреляции валютных пар" class="w-full h-full object-contain">
+                <table class="correlation-table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>EUR/USD</th>
+                      <th>GBP/USD</th>
+                      <th>USD/JPY</th>
+                      <th>AUD/USD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-bold">EUR/USD</td>
+                      <td class="high-positive">1.00</td>
+                      <td class="medium-positive">0.85</td>
+                      <td class="medium-negative">-0.60</td>
+                      <td class="medium-positive">0.72</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">GBP/USD</td>
+                      <td class="medium-positive">0.85</td>
+                      <td class="high-positive">1.00</td>
+                      <td class="medium-negative">-0.52</td>
+                      <td class="medium-positive">0.65</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">USD/JPY</td>
+                      <td class="medium-negative">-0.60</td>
+                      <td class="medium-negative">-0.52</td>
+                      <td class="high-positive">1.00</td>
+                      <td class="low-negative">-0.45</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">AUD/USD</td>
+                      <td class="medium-positive">0.72</td>
+                      <td class="medium-positive">0.65</td>
+                      <td class="low-negative">-0.45</td>
+                      <td class="high-positive">1.00</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

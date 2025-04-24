@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <rect x="0" y="0" width="600" height="300" fill="#1e3c72" opacity="0.2"/>
+  
+  <!-- Таблица корреляций -->
+  <g>
+    <!-- Фоновые ячейки для таблицы -->
+    <!-- Строка заголовков -->
+    <rect x="120" y="50" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="240" y="50" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="360" y="50" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="480" y="50" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    
+    <!-- Колонка заголовков -->
+    <rect x="0" y="90" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="0" y="130" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="0" y="170" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    <rect x="0" y="210" width="120" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="white" stroke-opacity="0.3" />
+    
+    <!-- Основная таблица -->
+    <!-- EUR/USD строка -->
+    <rect x="120" y="90" width="120" height="40" fill="rgba(76, 175, 80, 0.6)" stroke="white" stroke-opacity="0.3" />
+    <rect x="240" y="90" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="360" y="90" width="120" height="40" fill="rgba(244, 67, 54, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="480" y="90" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    
+    <!-- GBP/USD строка -->
+    <rect x="120" y="130" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="240" y="130" width="120" height="40" fill="rgba(76, 175, 80, 0.6)" stroke="white" stroke-opacity="0.3" />
+    <rect x="360" y="130" width="120" height="40" fill="rgba(244, 67, 54, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="480" y="130" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    
+    <!-- USD/JPY строка -->
+    <rect x="120" y="170" width="120" height="40" fill="rgba(244, 67, 54, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="240" y="170" width="120" height="40" fill="rgba(244, 67, 54, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="360" y="170" width="120" height="40" fill="rgba(76, 175, 80, 0.6)" stroke="white" stroke-opacity="0.3" />
+    <rect x="480" y="170" width="120" height="40" fill="rgba(244, 67, 54, 0.3)" stroke="white" stroke-opacity="0.3" />
+    
+    <!-- AUD/USD строка -->
+    <rect x="120" y="210" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="240" y="210" width="120" height="40" fill="rgba(76, 175, 80, 0.4)" stroke="white" stroke-opacity="0.3" />
+    <rect x="360" y="210" width="120" height="40" fill="rgba(244, 67, 54, 0.3)" stroke="white" stroke-opacity="0.3" />
+    <rect x="480" y="210" width="120" height="40" fill="rgba(76, 175, 80, 0.6)" stroke="white" stroke-opacity="0.3" />
+  </g>
+  
+  <!-- Текст для таблицы -->
+  <g fill="white" font-family="Roboto, sans-serif" font-size="14" text-anchor="middle">
+    <!-- Заголовок столбцов -->
+    <text x="60" y="75" font-weight="bold"></text>
+    <text x="180" y="75" font-weight="bold">EUR/USD</text>
+    <text x="300" y="75" font-weight="bold">GBP/USD</text>
+    <text x="420" y="75" font-weight="bold">USD/JPY</text>
+    <text x="540" y="75" font-weight="bold">AUD/USD</text>
+    
+    <!-- Заголовок строк -->
+    <text x="60" y="115" font-weight="bold">EUR/USD</text>
+    <text x="60" y="155" font-weight="bold">GBP/USD</text>
+    <text x="60" y="195" font-weight="bold">USD/JPY</text>
+    <text x="60" y="235" font-weight="bold">AUD/USD</text>
+    
+    <!-- Значения -->
+    <text x="180" y="115">1.00</text>
+    <text x="300" y="115">0.85</text>
+    <text x="420" y="115">-0.60</text>
+    <text x="540" y="115">0.72</text>
+    
+    <text x="180" y="155">0.85</text>
+    <text x="300" y="155">1.00</text>
+    <text x="420" y="155">-0.52</text>
+    <text x="540" y="155">0.65</text>
+    
+    <text x="180" y="195">-0.60</text>
+    <text x="300" y="195">-0.52</text>
+    <text x="420" y="195">1.00</text>
+    <text x="540" y="195">-0.45</text>
+    
+    <text x="180" y="235">0.72</text>
+    <text x="300" y="235">0.65</text>
+    <text x="420" y="235">-0.45</text>
+    <text x="540" y="235">1.00</text>
+  </g>
+  
+  <!-- Легенда -->
+  <g>
+    <rect x="120" y="260" width="20" height="10" fill="rgba(76, 175, 80, 0.6)" />
+    <text x="150" y="270" fill="white" font-family="Roboto, sans-serif" font-size="12">Сильная положительная</text>
+    
+    <rect x="300" y="260" width="20" height="10" fill="rgba(76, 175, 80, 0.4)" />
+    <text x="330" y="270" fill="white" font-family="Roboto, sans-serif" font-size="12">Умеренная положительная</text>
+    
+    <rect x="120" y="280" width="20" height="10" fill="rgba(244, 67, 54, 0.4)" />
+    <text x="150" y="290" fill="white" font-family="Roboto, sans-serif" font-size="12">Умеренная отрицательная</text>
+    
+    <rect x="300" y="280" width="20" height="10" fill="rgba(244, 67, 54, 0.3)" />
+    <text x="330" y="290" fill="white" font-family="Roboto, sans-serif" font-size="12">Слабая отрицательная</text>
+  </g>
+</svg>
