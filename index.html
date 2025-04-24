@@ -18,6 +18,7 @@
   
   <!-- Chart.js для графиков -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
 
   <!-- Custom CSS -->
   <style>
@@ -660,38 +661,51 @@
       // График корреляции валютных пар для слайда 4
       const ctxCorrelation = document.getElementById('correlationChart')?.getContext('2d');
       if (ctxCorrelation) {
+        const pairs = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'];
+        
+        // Матрица корреляций
+        const correlationData = [
+          [1.0, 0.85, -0.6, 0.72],    // EUR/USD с другими
+          [0.85, 1.0, -0.52, 0.65],   // GBP/USD с другими
+          [-0.6, -0.52, 1.0, -0.45],  // USD/JPY с другими
+          [0.72, 0.65, -0.45, 1.0]    // AUD/USD с другими
+        ];
+        
+        // Преобразуем в формат для графика
+        const matrixData = [];
+        for (let i = 0; i < pairs.length; i++) {
+          for (let j = 0; j < pairs.length; j++) {
+            matrixData.push({
+              x: pairs[j],
+              y: pairs[i],
+              v: correlationData[i][j]
+            });
+          }
+        }
+        
         new Chart(ctxCorrelation, {
-          type: 'heatmap',
+          type: 'matrix',
           data: {
             datasets: [{
-              data: [
-                { x: 'EUR/USD', y: 'EUR/USD', v: 1.0 },
-                { x: 'EUR/USD', y: 'GBP/USD', v: 0.85 },
-                { x: 'EUR/USD', y: 'USD/JPY', v: -0.6 },
-                { x: 'EUR/USD', y: 'AUD/USD', v: 0.72 },
-                { x: 'GBP/USD', y: 'EUR/USD', v: 0.85 },
-                { x: 'GBP/USD', y: 'GBP/USD', v: 1.0 },
-                { x: 'GBP/USD', y: 'USD/JPY', v: -0.52 },
-                { x: 'GBP/USD', y: 'AUD/USD', v: 0.65 },
-                { x: 'USD/JPY', y: 'EUR/USD', v: -0.6 },
-                { x: 'USD/JPY', y: 'GBP/USD', v: -0.52 },
-                { x: 'USD/JPY', y: 'USD/JPY', v: 1.0 },
-                { x: 'USD/JPY', y: 'AUD/USD', v: -0.45 },
-                { x: 'AUD/USD', y: 'EUR/USD', v: 0.72 },
-                { x: 'AUD/USD', y: 'GBP/USD', v: 0.65 },
-                { x: 'AUD/USD', y: 'USD/JPY', v: -0.45 },
-                { x: 'AUD/USD', y: 'AUD/USD', v: 1.0 }
-              ],
-              backgroundColor: ({ raw }) => {
-                const value = raw.v;
+              label: 'Корреляция валютных пар',
+              data: matrixData,
+              width: ({ chart }) => (chart.chartArea || {}).width / pairs.length - 1,
+              height: ({ chart }) => (chart.chartArea || {}).height / pairs.length - 1,
+              backgroundColor: function(context) {
+                const value = context.dataset.data[context.dataIndex].v;
                 const alpha = 0.8;
+                
                 if (value >= 0.8) return `rgba(0, 255, 0, ${alpha})`;
                 if (value >= 0.5) return `rgba(144, 238, 144, ${alpha})`;
                 if (value >= 0.2) return `rgba(255, 255, 0, ${alpha})`;
                 if (value >= -0.2) return `rgba(192, 192, 192, ${alpha})`;
                 if (value >= -0.5) return `rgba(255, 165, 0, ${alpha})`;
                 return `rgba(255, 0, 0, ${alpha})`;
-              }
+              },
+              borderWidth: 1,
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              hoverBackgroundColor: 'rgba(255, 255, 255, 0.9)',
+              hoverBorderColor: 'white',
             }]
           },
           options: {
@@ -703,32 +717,39 @@
               },
               tooltip: {
                 callbacks: {
-                  title: (items) => {
-                    if (!items.length) return '';
-                    const item = items[0];
+                  title: function(context) {
+                    const item = context[0];
+                    if (!item) return '';
                     return `${item.raw.x} и ${item.raw.y}`;
                   },
-                  label: (item) => {
-                    return `Корреляция: ${(item.raw.v).toFixed(2)}`;
+                  label: function(context) {
+                    const value = context.dataset.data[context.dataIndex].v;
+                    return `Корреляция: ${value.toFixed(2)}`;
                   }
                 }
               }
             },
             scales: {
               x: {
+                type: 'category',
+                labels: pairs,
                 ticks: {
-                  color: 'white'
+                  color: 'white',
+                  display: true
                 },
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.1)'
+                  display: false
                 }
               },
               y: {
+                type: 'category',
+                labels: pairs,
                 ticks: {
-                  color: 'white'
+                  color: 'white',
+                  display: true
                 },
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.1)'
+                  display: false
                 }
               }
             }
