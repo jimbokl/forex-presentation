@@ -18,6 +18,7 @@
   
   <!-- Chart.js для графиков -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
 
   <!-- Custom CSS -->
@@ -500,7 +501,7 @@
         <div class="custom-slide">
           <h1>Ключевые факторы успеха в проп-трейдинге</h1>
           
-          <div class="grid-container">
+          <div class="grid-container grid-cols-3">
             <div class="info-card text-center p-4">
               <i class="fas fa-brain text-green-300 text-3xl mb-3"></i>
               <div class="text-lg font-bold mb-2 text-green-300">Психологическая устойчивость</div>
@@ -516,9 +517,7 @@
                 Строгое соблюдение правил риск-менеджмента и защита капитала как главный приоритет
               </div>
             </div>
-          </div>
-          
-          <div class="grid-container mt-4">
+            
             <div class="info-card text-center p-4">
               <i class="fas fa-chart-bar text-green-300 text-3xl mb-3"></i>
               <div class="text-lg font-bold mb-2 text-green-300">Проверенная стратегия</div>
@@ -526,12 +525,30 @@
                 Последовательное применение тестированной и оптимизированной торговой системы
               </div>
             </div>
-            
+          </div>
+          
+          <div class="grid-container grid-cols-3 mt-4">
             <div class="info-card text-center p-4">
               <i class="fas fa-sync text-green-300 text-3xl mb-3"></i>
               <div class="text-lg font-bold mb-2 text-green-300">Адаптивность</div>
               <div class="text-sm">
                 Способность приспосабливаться к меняющимся рыночным условиям и корректировать стратегию
+              </div>
+            </div>
+            
+            <div class="info-card text-center p-4">
+              <i class="fas fa-graduation-cap text-green-300 text-3xl mb-3"></i>
+              <div class="text-lg font-bold mb-2 text-green-300">Постоянное обучение</div>
+              <div class="text-sm">
+                Непрерывное развитие навыков и изучение новых торговых подходов
+              </div>
+            </div>
+            
+            <div class="info-card text-center p-4">
+              <i class="fas fa-clipboard-check text-green-300 text-3xl mb-3"></i>
+              <div class="text-lg font-bold mb-2 text-green-300">Анализ результатов</div>
+              <div class="text-sm">
+                Регулярный анализ сделок и корректировка действий на основе полученного опыта
               </div>
             </div>
           </div>
@@ -663,49 +680,27 @@
       if (ctxCorrelation) {
         const pairs = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'];
         
-        // Матрица корреляций
-        const correlationData = [
-          [1.0, 0.85, -0.6, 0.72],    // EUR/USD с другими
-          [0.85, 1.0, -0.52, 0.65],   // GBP/USD с другими
-          [-0.6, -0.52, 1.0, -0.45],  // USD/JPY с другими
-          [0.72, 0.65, -0.45, 1.0]    // AUD/USD с другими
-        ];
-        
-        // Преобразуем в формат для графика
-        const matrixData = [];
-        for (let i = 0; i < pairs.length; i++) {
-          for (let j = 0; j < pairs.length; j++) {
-            matrixData.push({
-              x: pairs[j],
-              y: pairs[i],
-              v: correlationData[i][j]
-            });
-          }
-        }
-        
+        // Создаем простой bar chart вместо матрицы для лучшей совместимости
         new Chart(ctxCorrelation, {
-          type: 'matrix',
+          type: 'bar',
           data: {
+            labels: ['EUR/USD vs GBP/USD', 'EUR/USD vs USD/JPY', 'EUR/USD vs AUD/USD', 'GBP/USD vs USD/JPY'],
             datasets: [{
               label: 'Корреляция валютных пар',
-              data: matrixData,
-              width: ({ chart }) => (chart.chartArea || {}).width / pairs.length - 1,
-              height: ({ chart }) => (chart.chartArea || {}).height / pairs.length - 1,
-              backgroundColor: function(context) {
-                const value = context.dataset.data[context.dataIndex].v;
-                const alpha = 0.8;
-                
-                if (value >= 0.8) return `rgba(0, 255, 0, ${alpha})`;
-                if (value >= 0.5) return `rgba(144, 238, 144, ${alpha})`;
-                if (value >= 0.2) return `rgba(255, 255, 0, ${alpha})`;
-                if (value >= -0.2) return `rgba(192, 192, 192, ${alpha})`;
-                if (value >= -0.5) return `rgba(255, 165, 0, ${alpha})`;
-                return `rgba(255, 0, 0, ${alpha})`;
-              },
-              borderWidth: 1,
-              borderColor: 'rgba(255, 255, 255, 0.2)',
-              hoverBackgroundColor: 'rgba(255, 255, 255, 0.9)',
-              hoverBorderColor: 'white',
+              data: [0.85, -0.6, 0.72, -0.52],
+              backgroundColor: [
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(255, 99, 132, 0.7)'
+              ],
+              borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)'
+              ],
+              borderWidth: 1
             }]
           },
           options: {
@@ -717,40 +712,41 @@
               },
               tooltip: {
                 callbacks: {
-                  title: function(context) {
-                    const item = context[0];
-                    if (!item) return '';
-                    return `${item.raw.x} и ${item.raw.y}`;
-                  },
                   label: function(context) {
-                    const value = context.dataset.data[context.dataIndex].v;
-                    return `Корреляция: ${value.toFixed(2)}`;
+                    return `Корреляция: ${context.parsed.y.toFixed(2)}`;
                   }
+                }
+              },
+              datalabels: {
+                align: 'end',
+                anchor: 'end',
+                color: 'white',
+                font: {
+                  weight: 'bold'
+                },
+                formatter: function(value) {
+                  return value.toFixed(2);
                 }
               }
             },
             scales: {
               x: {
-                type: 'category',
-                labels: pairs,
                 ticks: {
-                  color: 'white',
-                  display: true
+                  color: 'white'
                 },
                 grid: {
-                  display: false
+                  color: 'rgba(255, 255, 255, 0.1)'
                 }
               },
               y: {
-                type: 'category',
-                labels: pairs,
                 ticks: {
-                  color: 'white',
-                  display: true
+                  color: 'white'
                 },
                 grid: {
-                  display: false
-                }
+                  color: 'rgba(255, 255, 255, 0.1)'
+                },
+                min: -1,
+                max: 1
               }
             }
           }
