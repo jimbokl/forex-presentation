@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .table-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+        .correlation-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        /* Navigation styles */
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .indicator-dot.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1 class="title">Популярные валютные пары и их характеристики</h1>
+        
+        <div class="grid-container">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Валютная пара</th>
+                            <th>Дневная волатильность</th>
+                            <th>Спред</th>
+                            <th>Активные сессии</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EUR/USD</td>
+                            <td>80-112 пипс (5.92%)</td>
+                            <td>0.0-1.7</td>
+                            <td>Лондон, Нью-Йорк</td>
+                        </tr>
+                        <tr>
+                            <td>GBP/USD</td>
+                            <td>80-150 пипс (6.33%)</td>
+                            <td>0.0-1.6</td>
+                            <td>Лондон, Нью-Йорк</td>
+                        </tr>
+                        <tr>
+                            <td>USD/JPY</td>
+                            <td>70-160 пипс (13.27%)</td>
+                            <td>0.7-1.6</td>
+                            <td>Токио, Лондон</td>
+                        </tr>
+                        <tr>
+                            <td>AUD/USD</td>
+                            <td>70-100 пипс</td>
+                            <td>0.0-1.5</td>
+                            <td>Сидней, Токио</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container">
+                <h3 class="text-xl font-bold mb-4">Корреляция валютных пар</h3>
+                <div class="correlation-container">
+                    <canvas id="correlationChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('correlationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'heatmap',
+            data: {
+                labels: ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'],
+                datasets: [{
+                    label: 'EUR/USD',
+                    data: [1, 0.89, -0.95, 0.65],
+                    backgroundColor: '#4CAF50'
+                },
+                {
+                    label: 'GBP/USD',
+                    data: [0.89, 1, -0.85, 0.72],
+                    backgroundColor: '#2196F3'
+                },
+                {
+                    label: 'USD/JPY',
+                    data: [-0.95, -0.85, 1, -0.58],
+                    backgroundColor: '#F44336'
+                },
+                {
+                    label: 'AUD/USD',
+                    data: [0.65, 0.72, -0.58, 1],
+                    backgroundColor: '#FFC107'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Navigation buttons -->
+    <div class="navigation">
+        <a href="slide3.html" class="nav-button" title="Предыдущий слайд">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="slide5.html" class="nav-button" title="Следующий слайд">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+    
+    <!-- Slide indicators -->
+    <div class="slide-indicator">
+        <a href="slide1.html" class="indicator-dot"></a>
+        <a href="slide2.html" class="indicator-dot"></a>
+        <a href="slide3.html" class="indicator-dot"></a>
+        <div class="indicator-dot active"></div>
+        <a href="slide5.html" class="indicator-dot"></a>
+        <a href="slide6.html" class="indicator-dot"></a>
+        <a href="slide7.html" class="indicator-dot"></a>
+    </div>
+
+    <!-- Keyboard navigation -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                window.location.href = 'slide5.html';
+            } else if (event.key === 'ArrowLeft') {
+                window.location.href = 'slide3.html';
+            }
+        });
+    </script>
+</body>
+</html>

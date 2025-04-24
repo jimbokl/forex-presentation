@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        .key-point {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+        .icon {
+            color: #4CAF50;
+            margin-top: 4px;
+        }
+        
+        /* Navigation styles */
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .indicator-dot.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1 class="title">Ситуация на рынке Forex в 2025 году</h1>
+        
+        <div class="grid-container">
+            <div class="info-card">
+                <div class="key-point">
+                    <i class="fas fa-chart-line icon"></i>
+                    <div>
+                        <strong>Мировая экономика:</strong> Умеренный рост 3.3%, влияние на движение валют через экономические показатели
+                    </div>
+                </div>
+                <div class="key-point">
+                    <i class="fas fa-university icon"></i>
+                    <div>
+                        <strong>Монетарная политика:</strong> Активное управление ставками центральными банками для контроля инфляции
+                    </div>
+                </div>
+                <div class="key-point">
+                    <i class="fas fa-globe icon"></i>
+                    <div>
+                        <strong>Геополитические факторы:</strong> Торговые войны, региональные конфликты влияют на валютные курсы
+                    </div>
+                </div>
+                <div class="key-point">
+                    <i class="fas fa-vote-yea icon"></i>
+                    <div>
+                        <strong>Влияние выборов в США:</strong> Значительное влияние на USD и связанные пары
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3 class="text-xl font-bold mb-4">Волатильность основных валютных пар</h3>
+                <div class="chart-container">
+                    <canvas id="volatilityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="navigation">
+        <a href="slide1.html" class="nav-button" title="Предыдущий слайд">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="slide3.html" class="nav-button" title="Следующий слайд">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+    
+    <!-- Slide indicators -->
+    <div class="slide-indicator">
+        <a href="slide1.html" class="indicator-dot"></a>
+        <div class="indicator-dot active"></div>
+        <a href="slide3.html" class="indicator-dot"></a>
+        <a href="slide4.html" class="indicator-dot"></a>
+        <a href="slide5.html" class="indicator-dot"></a>
+        <a href="slide6.html" class="indicator-dot"></a>
+        <a href="slide7.html" class="indicator-dot"></a>
+    </div>
+
+    <!-- Keyboard navigation -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                window.location.href = 'slide3.html';
+            } else if (event.key === 'ArrowLeft') {
+                window.location.href = 'slide1.html';
+            }
+        });
+    </script>
+
+    <script>
+        const ctx = document.getElementById('volatilityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Средняя волатильность (%)',
+                    data: [10.6, 9.0, 7.3, 6.8],
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

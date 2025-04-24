@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .stages-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .stage-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .stage-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stage-icon {
+            color: #4CAF50;
+        }
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .action-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+        .action-icon {
+            color: #4CAF50;
+            margin-top: 4px;
+        }
+        .warning-section {
+            background: rgba(244, 67, 54, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .warning-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #F44336;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Navigation styles */
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .indicator-dot.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1 class="title">План действий на каждом этапе проп-программы</h1>
+        
+        <div class="stages-container">
+            <div class="stage-card">
+                <div class="stage-title">
+                    <i class="fas fa-flag-checkered stage-icon"></i>
+                    Challenge этап
+                </div>
+                <ul class="action-list">
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Разработка детального торгового плана</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Тестирование стратегии на демо-счете</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Строгое управление рисками (1-2% на сделку)</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Ведение подробного трейд-журнала</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="stage-card">
+                <div class="stage-title">
+                    <i class="fas fa-shield-alt stage-icon"></i>
+                    Verification этап
+                </div>
+                <ul class="action-list">
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Следование проверенной стратегии</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Контроль эмоций и дисциплина</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Соблюдение правил проп-фирмы</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Анализ результатов и корректировки</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="stage-card">
+                <div class="stage-title">
+                    <i class="fas fa-crown stage-icon"></i>
+                    Funded этап
+                </div>
+                <ul class="action-list">
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Ответственное управление капиталом</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Постепенное масштабирование</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Регулярная отчетность</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check action-icon"></i>
+                        <span>Непрерывное обучение и развитие</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warning-section">
+            <div class="warning-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Типичные ошибки, которых следует избегать
+            </div>
+            <ul class="action-list">
+                <li class="action-item">
+                    <i class="fas fa-times" style="color: #F44336;"></i>
+                    <span>Чрезмерная торговля и погоня за прибылью</span>
+                </li>
+                <li class="action-item">
+                    <i class="fas fa-times" style="color: #F44336;"></i>
+                    <span>Игнорирование правил управления рисками</span>
+                </li>
+                <li class="action-item">
+                    <i class="fas fa-times" style="color: #F44336;"></i>
+                    <span>Торговля под влиянием эмоций</span>
+                </li>
+                <li class="action-item">
+                    <i class="fas fa-times" style="color: #F44336;"></i>
+                    <span>Использование чрезмерного кредитного плеча</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="navigation">
+        <a href="slide4.html" class="nav-button" title="Предыдущий слайд">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="slide6.html" class="nav-button" title="Следующий слайд">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+    
+    <!-- Slide indicators -->
+    <div class="slide-indicator">
+        <a href="slide1.html" class="indicator-dot"></a>
+        <a href="slide2.html" class="indicator-dot"></a>
+        <a href="slide3.html" class="indicator-dot"></a>
+        <a href="slide4.html" class="indicator-dot"></a>
+        <div class="indicator-dot active"></div>
+        <a href="slide6.html" class="indicator-dot"></a>
+        <a href="slide7.html" class="indicator-dot"></a>
+    </div>
+
+    <!-- Keyboard navigation -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                window.location.href = 'slide6.html';
+            } else if (event.key === 'ArrowLeft') {
+                window.location.href = 'slide4.html';
+            }
+        });
+    </script>
+</body>
+</html>

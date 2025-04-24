@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            margin: 0 auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .success-factors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        .factor-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .factor-card:hover {
+            transform: translateY(-5px);
+        }
+        .factor-icon {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        .factor-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        .factor-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+        .quote-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+        }
+        .quote-icon {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .quote-author {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Navigation styles */
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .indicator-dot.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1 class="title">Ключевые факторы успеха в проп-трейдинге</h1>
+        
+        <div class="success-factors">
+            <div class="factor-card">
+                <i class="fas fa-brain factor-icon"></i>
+                <div class="factor-title">Психологическая устойчивость</div>
+                <div class="factor-description">
+                    Контроль эмоций, дисциплина и способность придерживаться торгового плана даже в стрессовых ситуациях
+                </div>
+            </div>
+
+            <div class="factor-card">
+                <i class="fas fa-shield-alt factor-icon"></i>
+                <div class="factor-title">Управление рисками</div>
+                <div class="factor-description">
+                    Строгое соблюдение правил риск-менеджмента и защита капитала как главный приоритет
+                </div>
+            </div>
+
+            <div class="factor-card">
+                <i class="fas fa-chart-bar factor-icon"></i>
+                <div class="factor-title">Проверенная стратегия</div>
+                <div class="factor-description">
+                    Последовательное применение тестированной и оптимизированной торговой системы
+                </div>
+            </div>
+        </div>
+
+        <div class="success-factors">
+            <div class="factor-card">
+                <i class="fas fa-sync factor-icon"></i>
+                <div class="factor-title">Адаптивность</div>
+                <div class="factor-description">
+                    Способность приспосабливаться к меняющимся рыночным условиям и корректировать стратегию
+                </div>
+            </div>
+
+            <div class="factor-card">
+                <i class="fas fa-graduation-cap factor-icon"></i>
+                <div class="factor-title">Постоянное обучение</div>
+                <div class="factor-description">
+                    Непрерывное развитие навыков и изучение новых торговых подходов
+                </div>
+            </div>
+
+            <div class="factor-card">
+                <i class="fas fa-clipboard-check factor-icon"></i>
+                <div class="factor-title">Анализ результатов</div>
+                <div class="factor-description">
+                    Регулярный анализ сделок и корректировка действий на основе полученного опыта
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-container">
+            <i class="fas fa-quote-right quote-icon"></i>
+            <div class="quote-text">
+                "Успех в трейдинге приходит к тем, кто сочетает терпение мудреца с дисциплиной воина"
+            </div>
+            <div class="quote-author">
+                — Правило успешного проп-трейдера
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="navigation">
+        <a href="slide6.html" class="nav-button" title="Предыдущий слайд">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <span class="nav-button disabled" title="Последний слайд">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+    </div>
+    
+    <!-- Slide indicators -->
+    <div class="slide-indicator">
+        <a href="slide1.html" class="indicator-dot"></a>
+        <a href="slide2.html" class="indicator-dot"></a>
+        <a href="slide3.html" class="indicator-dot"></a>
+        <a href="slide4.html" class="indicator-dot"></a>
+        <a href="slide5.html" class="indicator-dot"></a>
+        <a href="slide6.html" class="indicator-dot"></a>
+        <div class="indicator-dot active"></div>
+    </div>
+
+    <!-- Keyboard navigation -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                window.location.href = 'slide6.html';
+            }
+        });
+    </script>
+</body>
+</html>

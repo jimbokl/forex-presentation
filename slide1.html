@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Roboto', sans-serif;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(200px, -200px);
+        }
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-150px, 150px);
+        }
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            max-width: 80%;
+            z-index: 1;
+        }
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+        }
+        .date {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+        }
+        .forex-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+        }
+        
+        /* Navigation styles */
+        .navigation {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-indicator {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .indicator-dot.active {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <i class="fas fa-chart-line forex-icon"></i>
+        <h1 class="title">Как успешно проходить проп-трейдинг на рынке Forex в 2025 году</h1>
+        <h2 class="subtitle">Стратегии и рекомендации для трейдеров</h2>
+        <div class="date">Апрель 2025</div>
+        
+        <!-- Navigation buttons -->
+        <div class="navigation">
+            <a class="nav-button disabled" title="Предыдущий слайд">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <a href="slide2.html" class="nav-button" title="Следующий слайд">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+        <!-- Slide indicators -->
+        <div class="slide-indicator">
+            <div class="indicator-dot active"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+            <div class="indicator-dot"></div>
+        </div>
+    </div>
+    
+    <!-- Keyboard navigation -->
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                const nextLink = document.querySelector('.nav-button:not(.disabled) a[href], a.nav-button:not(.disabled)[href]');
+                if (nextLink) {
+                    window.location.href = nextLink.getAttribute('href');
+                }
+            } else if (event.key === 'ArrowLeft') {
+                const prevLink = document.querySelector('.nav-button:not(.disabled):first-child a[href], a.nav-button:not(.disabled):first-child[href]');
+                if (prevLink) {
+                    window.location.href = prevLink.getAttribute('href');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
